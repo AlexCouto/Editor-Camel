@@ -10,3 +10,5 @@ back/.env
 
 front/android
 front/ios
+
+postgres-data

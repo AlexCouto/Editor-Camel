@@ -18,7 +18,7 @@ def getClientId(cur, client_email):
     return None
 
 def saveProject(project_data):
-    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+    conn = psycopg2.connect(DATABASE_URL, sslmode='prefer')
     cur = conn.cursor()
 
     client_email = project_data["client_email"]
@@ -53,7 +53,7 @@ def saveProject(project_data):
 
 
 def getAllProjectsFromClient(client_email):
-    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+    conn = psycopg2.connect(DATABASE_URL, sslmode='prefer')
     cur = conn.cursor()
 
     client_id = getClientId(cur, client_email)

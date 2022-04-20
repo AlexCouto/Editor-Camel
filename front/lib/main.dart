@@ -18,7 +18,6 @@ class MyApp extends StatefulWidget {
   // final url = "https://tcc-opus-back.herokuapp.com/";
   final url = "http://localhost:5000/";
 
-
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -55,7 +54,7 @@ class _MyAppState extends State<MyApp> {
       setState(() {
         this.isLogged = false;
       });
-      var _ = await http.post(Uri.parse(widget.url + "logout") ,
+      var _ = await http.post(Uri.parse(widget.url + "logout"),
           body: json.encode({"client_email": email}),
           headers: {'Content-type': 'application/json'});
 
@@ -95,11 +94,11 @@ class _MyAppState extends State<MyApp> {
 
     this.homeWidget = MainCanvas(widget.url, this.email, this.logOut);
 
-    // if (this.isLogged!)
-    //   this.homeWidget = MainCanvas(widget.url, this.email, this.logOut);
-    // else
-    //   this.homeWidget =
-    //       LoginPage(isLoggedHandler, isSignedUpHandler, widget.url);
+    if (this.isLogged!)
+      this.homeWidget = MainCanvas(widget.url, this.email, this.logOut);
+    else
+      this.homeWidget =
+          LoginPage(isLoggedHandler, isSignedUpHandler, widget.url);
 
     return MaterialApp(
       title: 'Editor Visual',

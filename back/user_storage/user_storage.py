@@ -9,7 +9,7 @@ load_dotenv()
 DATABASE_URL = os.environ['DATABASE_URL']
 
 def createTables():
-    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+    conn = psycopg2.connect(DATABASE_URL, sslmode='prefer')
     cur = conn.cursor()
 
     cur.execute("""
@@ -41,7 +41,7 @@ def createTables():
 
 
 def clientLogin(email, password):
-    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+    conn = psycopg2.connect(DATABASE_URL, sslmode='prefer')
     cur = conn.cursor()
 
     cur.execute("SELECT * FROM client WHERE email=%s;", (email, ))
@@ -71,7 +71,7 @@ def clientLogin(email, password):
 
 
 def addClient(email, password):
-    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+    conn = psycopg2.connect(DATABASE_URL, sslmode='prefer')
     cur = conn.cursor()
 
     salt = os.urandom(32)

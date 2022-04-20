@@ -1,0 +1,32 @@
+version: '3.4'
+
+services:
+
+  front:
+    build: front
+    ports:
+      - "5001:5001"
+      
+  back:
+    build: back
+    environment:
+      REDIS_HOST: redis-server
+      REDIS_PORT: 6379
+      DATABASE_URL: host=postgres-db dbname=postgres user=postgres password=secret
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./back:/home/user/back
+
+  redis-server:
+    image: redis
+
+  postgres-db:
+    image: postgres
+    environment:
+       POSTGRES_PASSWORD: secret
+       POSTGRES_USER : postgres
+       POSTGRES_DB : postgres
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./postgres-data:/var/lib/postgresql/data
